@@ -1,0 +1,49 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "title": "COVID-19 Total Cases at 29 October 2020",
+  "width": 800,
+  "height": 600,
+  "data": {
+    "url": "https://raw.githubusercontent.com/RickyTran1/FIT3179/main/ne_110m_admin_0_countries.json",
+    "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+  },
+  "transform": [
+    {
+      "lookup": "properties.NAME",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/RickyTran1/FIT3179/main/curr_covid.csv"
+        },
+        "key": "Country",
+        "fields": ["total_cases", "population"]
+      }
+    },
+    {
+      "calculate": "datum.total_cases/datum.population * 10000",
+      "as": "Total Cases per 10,000 Population"
+    }
+  ],
+  "projection": {"type": "equirectangular"},
+  "mark": {"type": "geoshape"},
+  "encoding": {
+    "color": {
+      "field": "Total Cases per 10,000 Population",
+      "type": "quantitative",
+      "scale": {
+        "type": "threshold",
+        "domain": [1, 100, 200],
+        "range": ["#cbc9e2", "#9e9ac8", "#756bb1", "#54278f"]
+      }
+    },
+    "tooltip": [
+      {"field": "properties.NAME", "type": "nominal", "title": "Country"},
+      {"field": "total_cases", "type": "quantitative"},
+      {
+        "field": "Total Cases per 10,000 Population",
+        "type": "quantitative",
+        "format": ".2f"
+      }
+    ]
+  },
+  "config": {}
+}
