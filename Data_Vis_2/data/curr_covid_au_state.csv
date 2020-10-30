@@ -1,0 +1,9 @@
+date,state,state_abbrev,confirmed,confirmed_cum,deaths,deaths_cum,tests,tests_cum,positives,positives_cum,recovered,recovered_cum,hosp,hosp_cum,icu,icu_cum,vent,vent_cum
+2020-10-30,Australian Capital Territory,ACT,0,114,0,3,538,106715,0,114,1,111,0,0,0,0,0,0
+2020-10-30,New South Wales,NSW,6,4417,0,53,12785,3042038,6,4417,0,2802,0,7,0,1,0,0
+2020-10-30,Northern Territory,NT,0,37,0,0,367,58329,0,37,0,33,0,4,0,0,0,0
+2020-10-30,Queensland,QLD,1,1172,0,6,4191,1233236,1,1172,0,1159,1,4,0,0,0,0
+2020-10-30,South Australia,SA,1,497,0,4,3445,548675,1,497,1,483,0,0,0,0,0,0
+2020-10-30,Tasmania,TAS,0,230,0,13,672,117087,0,230,0,217,0,0,0,0,0,0
+2020-10-30,Victoria,VIC,3,20347,0,819,23583,3154371,3,20347,-1,19381,0,5,0,0,0,0
+2020-10-30,Western Australia,WA,1,767,0,9,1949,487990,1,767,4,712,0,0,0,0,0,0
