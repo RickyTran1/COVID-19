@@ -1,4 +1,4 @@
-LGA_x,lga_pid,population,active,cases,rate,new,band,LGADisplay,data_date,Testing Rate
+LGA_x,lga_pid,population,active,cases,rate,new,band,LGADisplay,data_date,TestingRate
 Alpine ,VIC242,12814,0,1,0,0,0,Alpine,31/10/2020,2294
 Ararat ,VIC220,11845,0,7,0,0,0,Ararat,31/10/2020,5040
 Ballarat ,VIC241,109505,0,58,0,0,0,Ballarat,31/10/2020,2536
