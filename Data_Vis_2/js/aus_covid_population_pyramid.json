@@ -1,0 +1,68 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "title": "COVID-19 Deaths by Age and Gender (*each bar is an interval of 9 years)",
+  "data": {
+    "url": "https://raw.githubusercontent.com/RickyTran1/FIT3179/main/Data_Vis_2/data/COVID_AU_DEATH_AGE_GENDER.csv"
+  },
+  "transform": [
+    {"calculate": "datum.sex == 2 ? 'Female' : 'Male'", "as": "gender"}
+  ],
+  "spacing": 0,
+  "hconcat": [
+    {
+      "transform": [{"filter": {"field": "gender", "equal": "Female"}}],
+      "title": "Female",
+      "mark": "bar",
+      "encoding": {
+        "y": {"field": "age", "axis": null, "sort": "descending"},
+        "x": {
+          "aggregate": "sum",
+          "field": "deaths",
+          "title": "Deaths",
+          "axis": {"format": "s"},
+          "sort": "descending"
+        },
+        "color": {
+          "field": "gender",
+          "scale": {"range": ["#df65b0", "#0570b0"]},
+          "legend": null
+        }
+      }
+    },
+    {
+      "width": 25,
+      "view": {"stroke": null},
+      "mark": {"type": "text", "align": "center"},
+      "encoding": {
+        "y": {
+          "field": "age",
+          "type": "ordinal",
+          "axis": null,
+          "sort": "descending"
+        },
+        "text": {"field": "age", "type": "quantitative"}
+      }
+    },
+    {
+      "transform": [{"filter": {"field": "gender", "equal": "Male"}}],
+      "title": "Male",
+      "mark": "bar",
+      "encoding": {
+        "y": {
+          "field": "age",
+          "title": null,
+          "axis": null,
+          "sort": "descending"
+        },
+        "x": {
+          "aggregate": "sum",
+          "field": "deaths",
+          "title": "Deaths",
+          "axis": {"format": "s"}
+        },
+        "color": {"field": "gender", "legend": null}
+      }
+    }
+  ],
+  "config": {"view": {"stroke": null}, "axis": {"grid": false}}
+}
