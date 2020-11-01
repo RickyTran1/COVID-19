@@ -1,0 +1,142 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "width": 800,
+  "height": 600,
+  "title": "COVID-19 Confirmed Cases and Testing Rate per Local Government Area in Victoria (30 Oct 2020)",
+  "data": {
+    "url": "https://raw.githubusercontent.com/RickyTran1/FIT3179/main/Data_Vis_2/data/COVID_VIC_LGA_FULL.csv"
+  },
+  "params": [
+    {
+      "name": "Population_Above",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 250000,
+        "step": 25000,
+        "name": "Minimum Population: "
+      }
+    }
+  ],
+  "transform": [
+    {"filter": "datum.cases > 0"},
+    {"filter": "datum.TestingRate > 0"},
+    {"filter": "datum.population > Population_Above"},
+    {
+      "calculate": "datum.cases/datum.population * 10000",
+      "as": "Cases per 10,000 Population"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "cases",
+      "type": "quantitative",
+      "title": "Confirmed Cases",
+      "axis": {"tickCount": 4},
+      "scale": {"type": "log", "domain": [1, 10000]}
+    },
+    "y": {
+      "field": "TestingRate",
+      "type": "quantitative",
+      "title": "Testing Rate",
+      "axis": {"tickCount": 10},
+      "scale": {"type": "log", "domain": [1000, 10000]}
+    }
+  },
+  "layer": [
+    {
+      "mark": "circle",
+      "encoding": {
+        "size": {
+          "field": "population",
+          "title": "Population",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [10000, 50000, 150000, 250000]
+          },
+          "legend": {"format": ".2s"}
+        },
+        "color": {"value": "#C37CBF"},
+        "tooltip": [
+          {
+            "field": "LGADisplay",
+            "type": "nominal",
+            "title": "Local Government Area"
+          },
+          {"field": "lga_pid", "type": "nominal", "title": "LGA ID"},
+          {
+            "field": "population",
+            "type": "quantitative",
+            "title": "Population"
+          },
+          {
+            "field": "cases",
+            "type": "quantitative",
+            "format": ",",
+            "title": "Confirmed Cases"
+          },
+          {
+            "field": "TestingRate",
+            "type": "quantitative",
+            "format": ",",
+            "title": "Testing Rate"
+          },
+          {
+            "field": "Cases per 10,000 Population",
+            "type": "quantitative",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "bottom",
+        "dx": -12,
+        "fontSize": 12,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {"field": "LGADisplay", "type": "nominal"},
+        "color": {"value": "black"},
+        "opacity": {
+          "condition": {
+            "test": "datum['LGADisplay'] == 'Darebin' || datum['LGADisplay'] == 'Wyndham' || datum['LGADisplay'] == 'East Gippsland' || datum['LGADisplay'] == 'Ararat' || datum['LGADisplay'] == 'Latrobe' || datum['LGADisplay'] == 'Monash'",
+            "value": 1
+          },
+          "value": 0
+        },
+        "tooltip": [
+          {
+            "field": "LGADisplay",
+            "type": "nominal",
+            "title": "Local Government Area"
+          },
+          {"field": "lga_pid", "type": "nominal", "title": "LGA ID"},
+          {
+            "field": "cases",
+            "type": "quantitative",
+            "format": ",",
+            "title": "Confirmed Cases"
+          },
+          {
+            "field": "TestingRate",
+            "type": "quantitative",
+            "format": ",",
+            "title": "Testing Rate"
+          },
+          {
+            "field": "Cases per 10,000 Population",
+            "type": "quantitative",
+            "format": ".2f"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {}
+}
