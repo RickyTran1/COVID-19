@@ -1,7 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
   "title": "COVID-19 Confirmed Cases in Australia per 10,000 Population (30 Oct 2020)",
-  "width": "container",
+  "width": 720,
+  "height": 400,
   "data": {
     "url": "https://raw.githubusercontent.com/RickyTran1/FIT3179/main/Data_Vis_2/js/STE_2016_AUST.json",
     "format": {"type": "topojson", "feature": "STE_2016_AUST"}
