@@ -28,7 +28,7 @@
   "encoding": {
     "color": {
       "field": "Confirmed Cases per 10,000 Population",
-      "title": "Confirmed Cases per 10,000",
+      "title": "Cases per 10,000",
       "type": "quantitative",
       "scale": {
         "type": "threshold",
