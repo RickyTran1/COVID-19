@@ -57,7 +57,23 @@
       "type": "quantitative",
       "title": "Daily Cases per 10,000 Population"
     },
-    "color": {"field": "state"}
+    "color": {"field": "state"},
+    "tooltip": [
+      {"field": "state", "type": "nominal", "title": "State"},
+      {"field": "date", "type": "temporal", "title": "Date"},
+      {"field": "confirmed", "type": "quantitative", "title": "Daily Cases"},
+      {
+        "field": "population",
+        "type": "quantitative",
+        "format": ",",
+        "title": "Population"
+      },
+      {
+        "field": "Daily Cases per 10,000 Population",
+        "type": "quantitative",
+        "format": ".2f"
+      }
+    ]
   },
   "layer": [
     {
@@ -90,7 +106,72 @@
         "opacity": {
           "condition": {"selection": "State_highlight", "value": 0.9},
           "value": 0.1
-        }
+        },
+        "tooltip": [
+          {"field": "state", "type": "nominal", "title": "State"},
+          {"field": "date", "type": "temporal", "title": "Date"},
+          {
+            "field": "confirmed",
+            "type": "quantitative",
+            "title": "Daily Cases"
+          },
+          {
+            "field": "population",
+            "type": "quantitative",
+            "format": ",",
+            "title": "Population"
+          },
+          {
+            "field": "Daily Cases per 10,000 Population",
+            "type": "quantitative",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "bottom",
+        "dx": -12,
+        "fontSize": 12,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {
+          "field": "Daily Cases per 10,000 Population",
+          "type": "nominal",
+          "format": ".3f"
+        },
+        "color": {"value": "black"},
+        "opacity": {
+          "condition": {
+            "test": "datum['state'] == 'Victoria' & datum['confirmed'] == 700 || datum['state'] == 'Australian Capital Territory' & datum['confirmed'] == 13 || datum['state'] == 'Tasmania' & datum['confirmed'] == 15",
+            "value": 1
+          },
+          "value": 0
+        },
+        "tooltip": [
+          {"field": "state", "type": "nominal", "title": "State"},
+          {"field": "date", "type": "temporal", "title": "Date"},
+          {
+            "field": "confirmed",
+            "type": "quantitative",
+            "title": "Daily Cases"
+          },
+          {
+            "field": "population",
+            "type": "quantitative",
+            "format": ",",
+            "title": "Population"
+          },
+          {
+            "field": "Daily Cases per 10,000 Population",
+            "type": "quantitative",
+            "format": ".3f"
+          }
+        ]
       }
     }
   ],
